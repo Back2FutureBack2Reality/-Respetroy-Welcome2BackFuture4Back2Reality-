@@ -1,0 +1,84 @@
+{
+  "name": "api-embedding-orchestrator",
+  "displayName": "API Embedding Orchestrator",
+  "description": "Semantic communication system for orchestrating multiple APIs through embeddings",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onCommand:api-orchestrator.discoverAPIs",
+    "onCommand:api-orchestrator.generateEmbeddings",
+    "onCommand:api-orchestrator.showSemanticGraph",
+    "onCommand:api-orchestrator.executeSymbol"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "api-orchestrator.discoverAPIs",
+        "title": "Discover APIs",
+        "category": "API Orchestrator"
+      },
+      {
+        "command": "api-orchestrator.generateEmbeddings",
+        "title": "Generate API Embeddings",
+        "category": "API Orchestrator"
+      },
+      {
+        "command": "api-orchestrator.showSemanticGraph",
+        "title": "Show API Semantic Graph",
+        "category": "API Orchestrator"
+      },
+      {
+        "command": "api-orchestrator.executeSymbol",
+        "title": "Execute Symbolic Command",
+        "category": "API Orchestrator"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "API Orchestrator Configuration",
+      "properties": {
+        "apiOrchestrator.embeddingProvider": {
+          "type": "string",
+          "default": "openai",
+          "enum": ["openai", "huggingface", "local"],
+          "description": "Embedding provider to use for semantic analysis"
+        },
+        "apiOrchestrator.enableSymbolicProtocol": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable symbolic communication protocol (* # ´ CLaK: <<RE:UNITY>>)"
+        },
+        "apiOrchestrator.autoDiscovery": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically discover APIs from .env files"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "mocha out/test/**/*.test.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "@types/mocha": "^10.0.0",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "openai": "^4.20.0",
+    "axios": "^1.6.0",
+    "yaml": "^2.3.4"
+  }
+}

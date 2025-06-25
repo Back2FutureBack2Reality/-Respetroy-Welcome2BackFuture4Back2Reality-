@@ -1,0 +1,72 @@
+# Example Orchestration Flow
+# This demonstrates how to create an API communication workflow
+
+name: "AI-Powered Content Creation and Storage"
+description: "Generate content using AI APIs and store results in version control"
+
+steps:
+  - id: "authenticate-openai"
+    order: 1
+    action: "authenticate"
+    api: "openai"
+    payload:
+      method: "bearer_token"
+    
+  - id: "generate-content"
+    order: 2
+    action: "query"
+    api: "openai"
+    payload:
+      model: "gpt-3.5-turbo"
+      prompt: "Generate a technical documentation outline for API integration"
+      max_tokens: 500
+    
+  - id: "transform-content"
+    order: 3
+    action: "transform"
+    payload:
+      input: "{{steps.generate-content.response}}"
+      type: "markdown"
+      format: "documentation"
+    
+  - id: "authenticate-github"
+    order: 4
+    action: "authenticate"
+    api: "github"
+    payload:
+      method: "token"
+    
+  - id: "create-repository-file"
+    order: 5
+    action: "forward"
+    api: "github"
+    payload:
+      repository: "user/docs-repo"
+      path: "api-integration-outline.md"
+      content: "{{steps.transform-content.result}}"
+      message: "Add AI-generated API documentation outline"
+
+# Symbolic Protocol Example
+symbolic_sequence:
+  - symbol: "*"
+    description: "Activate all required APIs"
+  - symbol: "#"
+    description: "Share context about documentation requirements"
+  - symbol: "´"
+    description: "Transmit generated content"
+  - symbol: "CLaK:DocumentationPhase"
+    description: "Transition to documentation storage phase"
+  - symbol: "<<RE:UNITY>>"
+    description: "Synchronize all APIs and confirm completion"
+
+# Expected Outputs
+outputs:
+  - name: "generated_content"
+    source: "steps.generate-content.response"
+    type: "text"
+  - name: "repository_url"
+    source: "steps.create-repository-file.html_url"
+    type: "url"
+  - name: "flow_completion"
+    source: "flow.status"
+    type: "status"
