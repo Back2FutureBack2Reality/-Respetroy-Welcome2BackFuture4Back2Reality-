@@ -1,0 +1,73 @@
+# API Embedding Orchestrator Configuration
+# This YAML file defines the semantic communication matrix for your APIs
+
+orchestrator:
+  name: "CLaK Codex API Orchestrator"
+  version: "1.0.0"
+  description: "Semantic communication system for API orchestration"
+
+# Symbolic Protocol Configuration
+symbolic_protocol:
+  enabled: true
+  symbols:
+    "*":
+      name: "Activation"
+      description: "Activates and initializes API systems"
+      auto_execute: false
+    "#":
+      name: "Knowledge Transfer"
+      description: "Transfers knowledge embeddings between APIs"
+      auto_execute: false
+    "´":
+      name: "Content Transmission"
+      description: "Transmits raw content and payloads"
+      auto_execute: false
+    "CLaK:":
+      name: "Chapter Shift"
+      description: "Initiates phase transition or new communication cycle"
+      auto_execute: false
+    "<<RE:UNITY>>":
+      name: "Network Reintegration"
+      description: "Synchronizes and reintegrates all APIs"
+      auto_execute: false
+    "-/-\\-":
+      name: "Super Symbol"
+      description: "Executes all protocols in sequence"
+      auto_execute: false
+
+# Embedding Configuration
+embeddings:
+  provider: "local"  # options: openai, huggingface, local
+  dimension: 384
+  similarity_threshold: 0.7
+  cache_embeddings: true
+
+# API Discovery Settings
+discovery:
+  auto_scan: true
+  scan_interval: 300  # seconds
+  env_files:
+    - ".env"
+    - ".env.local"
+    - ".env.development"
+    - ".env.production"
+
+# Orchestration Rules
+orchestration:
+  max_concurrent_flows: 5
+  default_timeout: 30000  # milliseconds
+  retry_attempts: 3
+  
+# Semantic Graph Settings
+semantic_graph:
+  auto_generate: true
+  include_clusters: true
+  include_recommendations: true
+  layout: "force-directed"
+
+# Logging Configuration
+logging:
+  level: "info"  # debug, info, warn, error
+  file: "api-orchestrator.log"
+  max_size: "10MB"
+  rotate: true
